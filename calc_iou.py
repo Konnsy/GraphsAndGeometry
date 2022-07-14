@@ -1,7 +1,11 @@
 import sys
 
 def boxIoU(boxA, boxB):
-	# compute the area of intersection rectangle
+    """
+	Calculates the Intersection over Union value between to boxes.
+	box format: [x1, y1, x2, y2]
+	"""
+	# compute the area of the intersecting rectangle
 	dx = min(boxA[2], boxB[2]) - max(boxA[0], boxB[0])
 	dy = min(boxA[3], boxB[3]) - max(boxA[1], boxB[1])
 	if dx < 0 or dy < 0:

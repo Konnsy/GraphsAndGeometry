@@ -3,6 +3,10 @@ from calc_cliques import calcCliques
 from calc_iou import boxIoU
 
 def mergeBoxes(boxes):
+	"""
+	Merges a list of boxes.
+	box format: [x1, y1, x2, y2]
+	"""
 	if len(boxes)==0:
 		return boxes
 
@@ -18,23 +22,3 @@ def mergeBoxes(boxes):
 		y2 = max(y2, box[3])
 
 	return [x1, y1, x2, y2]
-
-def mergeBoxesByIoU(boxes, iouThreshold):
-		# find pairs which have an iou greater than the given threshold
-		pairsToMerge = []
-		for i in range(len(boxes)):
-			for j in range(i+1, len(boxes)):
-				if boxIoU(boxes[i], boxes[j]) >= iouThreshold:
-					pairsToMerge.append([i,j])
-		
-		# merge boxes within each clique
-		resBoxes = []
-		cliques = calcCliques(pairsToMerge, [i for i in range(len(boxes))])
-		for clique in cliques:
-			if len(clique) == 1:
-				resBoxes.append(boxes[clique[0]])
-			elif len(clique) > 1:
-				cliqueBoxes = [boxes[id] for id in clique]
-				resBoxes.append(mergeBoxes(cliqueBoxes))
-
-		return resBoxes
