@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-from helper import boxIoU, mergeBoxes, isBoxContained, mergeBoxesByIoU, calcCliques
+from box_tracing_helper import boxIoU, mergeBoxes, isBoxContained, mergeBoxesByIoU, calcCliques
 
 class BoxTracer:
 	"""
